@@ -1,0 +1,40 @@
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:ui="sap.ui.table"
+	xmlns:core="sap.ui.core">
+
+	<Dialog
+		id="duplicateCheckDialog"
+		title="{i18n>FIND_PAYMENT_REQUESTS_WITH}"
+		draggable="true">
+
+		<List
+			id="duplicateCheckList"
+			mode="MultiSelect"
+			items="{DuplicateCheck>/items}">
+
+			<StandardListItem
+				title="{DuplicateCheck>fieldLabel}"
+				info="{DuplicateCheck>value}"
+				>
+				<customData>
+					<core:CustomData key="rawValue" value="{DuplicateCheck>rawValue}" />
+					<core:CustomData key="fieldName" value="{DuplicateCheck>fieldName}" />
+				</customData>
+			</StandardListItem>
+		</List>
+
+		<beginButton>
+			<Button text="{i18n>OK}" press="onDuplicateCheckOK" />
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>CANCEL}" press="onDuplicateCheckCancel" />
+		</endButton>
+	</Dialog>
+
+</core:FragmentDefinition>

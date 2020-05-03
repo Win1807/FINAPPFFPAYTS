@@ -1,0 +1,52 @@
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+>
+
+	<Column
+		id="listReport-LastChangedByUser"
+		visible="false"
+	>
+		<Text
+			id="listReport-LastChangedByUser-header"
+			text="{/#C_PaymentRequestType/LastChangedByUser/@sap:label}"
+		/>
+
+		<customData>
+			<core:CustomData key="p13nData" value='\{"columnKey": "LastChangedByUser", "columnIndex": "997"}'/>
+		</customData>
+	</Column>
+
+	<Column
+		id="listReport-PaymentBatch"
+		visible="false"
+	>
+		<Text
+			id="listReport-PaymentBatch-header"
+			text="{/#C_PaymentRequestType/PaymentBatch/@sap:label}"
+		/>
+
+		<customData>
+			<core:CustomData key="p13nData" value='\{"columnKey": "PaymentBatch", "columnIndex": "998"}'/>
+		</customData>
+	</Column>
+
+	<Column
+		id="listReport-ClearingAccountingDocument"
+		visible="false"
+	>
+		<Text
+			id="listReport-ClearingAccountingDocument-header"
+			text="{/#C_PaymentRequestType/ClearingAccountingDocument/@sap:label}"
+		/>
+
+		<customData>
+			<core:CustomData key="p13nData" value='\{"columnKey": "ClearingAccountingDocument", "columnIndex": "999"}'/>
+		</customData>
+	</Column>
+</core:FragmentDefinition>

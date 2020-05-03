@@ -1,0 +1,8 @@
+{ "application": "fin.ap.process.payments",
+  "version": "7.0.8",
+  "buildNumber": "53",
+  "buildId": "53",
+  "branch": "detached",
+  "revision": "9fc337ea824b2846b1c1137d1ba4b6290742aa83",
+  "GitURL": ""
+}

@@ -1,0 +1,31 @@
+{
+	"fileName": "id_1491315535842_97_propertyChange",
+	"fileType": "change",
+	"changeType": "propertyChange",
+	"reference": "fin.ap.process.payments.Component",
+	"packageName": "$TMP",
+	"content": {
+		"property": "showFooter",
+		"oldValue": false,
+		"newValue": true
+	},
+	"selector": {
+		"id": "fin.ap.process.payments::sap.suite.ui.generic.template.ObjectPage.view.Details::C_PaymentRequest--objectPage",
+		"type": "sap.uxap.ObjectPageLayout",
+		"idIsLocal": false
+	},
+	"layer": "VENDOR",
+	"texts": {},
+	"namespace": "apps/fin.ap.process.payments/changes/",
+	"creation": "2017-04-04T14:22:10.936Z",
+	"originalLanguage": "EN",
+	"conditions": {},
+	"context": "",
+	"support": {
+		"generator": "Change.createInitialFileContent",
+		"service": "",
+		"user": "",
+		"sapui5Version": "1.44.9"
+	},
+	"dependentSelector": {}
+}

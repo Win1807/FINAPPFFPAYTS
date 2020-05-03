@@ -1,0 +1,66 @@
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+	<Dialog id="saveTemplateDialog" title="{i18n>SAVE_AS_VARIANT_TITLE}" draggable="true">
+		<content>
+			<f:Form id="saveTemplateForm">
+				<f:layout>
+					<f:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4"
+						emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+				</f:layout>
+				<f:formContainers>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement label="{i18n>VARIANT_NAME}">
+								<f:fields>
+									<Input
+										id="templateName"
+										required="true"
+										maxLength="14"
+										valueState="{saveTemplate>/fields/name/valueState}"
+										valueStateText="{saveTemplate>/fields/name/valueStateText}"
+										change= "onTemplNameChange"
+									/>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="{i18n>VARIANT_DESCRIPTION}">
+								<f:fields>
+									<Input
+										id="templateDescription"
+										required="true"
+										maxLength="30"
+										valueState="{saveTemplate>/fields/description/valueState}"
+										valueStateText="{saveTemplate>/fields/description/valueStateText}"
+										change= "onTemplDescriptionChange"
+									/>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
+		</content>
+		<buttons>
+			<Button
+				id="saveNewTemplateButton"
+				text="{i18n>SAVE}"
+				press="onSaveTemplatePress"
+				enabled="{saveTemplate>/buttons/save}"
+			/>
+			<Button
+				id="overwriteTemplateButton"
+				text="{i18n>OVERWRITE}"
+				press="onOverwriteTemplatePress"
+				enabled="{saveTemplate>/buttons/overwrite}"
+			/>
+			<Button
+				id="cancelSaveTemplateButton"
+				text="{i18n>CANCEL}"
+				press="onSaveTemplateCancelPress"
+			/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

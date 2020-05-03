@@ -1,0 +1,1183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+	<edmx:Reference Uri="localhost/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+		<edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="localhost/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+		<edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+	</edmx:Reference>
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema Namespace="FAP_PROCESS_FF_PAYMENTS_SRV" sap:schema-version="1" xml:lang="en" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+			<EntityType Name="UserActivityType" sap:content-version="1">
+				<Key>
+					<PropertyRef Name="Uname"/>
+					<PropertyRef Name="Brobj"/>
+					<PropertyRef Name="Actvt"/>
+				</Key>
+				<Property MaxLength="12" Name="Uname" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="User Name" sap:sortable="false" sap:unicode="false" sap:updatable="false"/>
+				<Property MaxLength="10" Name="Brobj" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Object" sap:sortable="false" sap:unicode="false" sap:updatable="false" sap:value-list="standard"/>
+				<Property MaxLength="2" Name="Actvt" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Activity" sap:sortable="false" sap:unicode="false" sap:updatable="false" sap:value-list="standard"/>
+			</EntityType>
+			<EntityType Name="C_PaymentRequestType" sap:content-version="1" sap:label="Payment Requests">
+				<Key>
+					<PropertyRef Name="PaymentRequest"/>
+				</Key>
+				<Property MaxLength="10" Name="PaymentRequest" Nullable="false" Type="Edm.String" sap:creatable="false" sap:display-format="UpperCase" sap:label="Payment Request" sap:quickinfo="Payment Request Key Number" sap:updatable="false" sap:value-list="standard"/>
+				<Property MaxLength="4" Name="BusinessArea" Type="Edm.String" sap:display-format="UpperCase" sap:label="Business Area" sap:text="BusinessAreaName" sap:value-list="standard"/>
+				<Property MaxLength="30" Name="BusinessAreaName" Type="Edm.String" sap:label="BA Description" sap:quickinfo="Business Area Description"/>
+				<Property Name="PaymentRequestAmountInPaytCrcy" Precision="14" Scale="3" Type="Edm.Decimal" sap:label="Payt Crcy Amount" sap:quickinfo="Payment Request Amount in Payment Currency" sap:unit="PaymentRequestCurrency"/>
+				<Property MaxLength="5" Name="PaymentRequestCurrency" Type="Edm.String" sap:label="Payment Currency" sap:quickinfo="Payment Request Currency Key" sap:semantics="currency-code" sap:value-list="standard"/>
+				<Property Name="PaymentRequestAmountInCCCrcy" Precision="14" Scale="3" Type="Edm.Decimal" sap:creatable="false" sap:label="Local Crcy Amount" sap:quickinfo="Payment Request Amount in Local Currency" sap:unit="CompanyCodeCurrency" sap:updatable="false"/>
+				<Property MaxLength="5" Name="CompanyCodeCurrency" Type="Edm.String" sap:creatable="false" sap:label="Local Currency" sap:semantics="currency-code" sap:updatable="false" sap:value-list="standard"/>
+				<Property MaxLength="35" Name="PayeeName" Type="Edm.String" sap:label="Payee Name"/>
+				<Property MaxLength="35" Name="PayeeCityName" Type="Edm.String" sap:label="Payee City" sap:quickinfo="Payee City Name"/>
+				<Property MaxLength="35" Name="PayeeStreet" Type="Edm.String" sap:label="Payee Street" sap:quickinfo="Payee's Street"/>
+				<Property MaxLength="3" Name="PayeeCountry" Type="Edm.String" sap:display-format="UpperCase" sap:label="Payee Country" sap:quickinfo="Payee Country Key" sap:value-list="standard"/>
+				<Property MaxLength="12" Name="CreatedByUser" Type="Edm.String" sap:display-format="UpperCase" sap:label="Created By" sap:value-list="standard"/>
+				<Property MaxLength="3" Name="PayeeRegion" Type="Edm.String" sap:display-format="UpperCase" sap:label="Payee Region" sap:quickinfo="Regional Code of the Payee" sap:value-list="standard"/>
+				<Property MaxLength="2" Name="PayeeLanguage" Type="Edm.String" sap:label="Payee Language" sap:quickinfo="Payee Language Key" sap:value-list="standard"/>
+				<Property MaxLength="31" Name="PayeeFaxNumber" Type="Edm.String" sap:label="Payee Fax Number" sap:quickinfo="Fax Number of the Payee"/>
+				<Property MaxLength="16" Name="PayeeTelephoneNumber" Type="Edm.String" sap:label="Payee Tel Number" sap:quickinfo="Telephone Number of the Payee"/>
+				<Property MaxLength="3" Name="PayeeBankCountry" Type="Edm.String" sap:display-format="UpperCase" sap:label="Payee Bank Country" sap:value-list="standard"/>
+				<Property MaxLength="2" Name="PayeeBankControlKey" Type="Edm.String" sap:display-format="UpperCase" sap:label="Payee Bank Cntrl Key" sap:quickinfo="Bank Control Key of the Payee's Bank"/>
+				<Property MaxLength="15" Name="PayeeBank" Type="Edm.String" sap:display-format="UpperCase" sap:label="Payee Bank Number" sap:text="PayeeBankName"/>
+				<Property MaxLength="60" Name="PayeeBankName" Type="Edm.String" sap:label="Bank Name" sap:quickinfo="Name of Bank"/>
+				<Property MaxLength="18" Name="PayeeBankAccount" Type="Edm.String" sap:display-format="UpperCase" sap:label="Payee Account Number" sap:quickinfo="Bank Account Number of The Payee"/>
+				<Property MaxLength="15" Name="PayeeBankInternalID" Type="Edm.String" sap:display-format="UpperCase" sap:label="Payee Bank Key" sap:quickinfo="Payee Bank Number" sap:value-list="standard"/>
+				<Property Name="AccountingDocumentCreationDate" Precision="0" Type="Edm.DateTime" sap:display-format="Date" sap:label="Entered On" sap:quickinfo="Accounting Document Entry Date"/>
+				<Property MaxLength="60" Name="BankAccountHolderName" Type="Edm.String" sap:label="Account Holder" sap:quickinfo="Account Holder Name"/>
+				<Property MaxLength="34" Name="PayeeIBAN" Type="Edm.String" sap:display-format="UpperCase" sap:label="IBAN of the Payee"/>
+				<Property MaxLength="50" Name="ReferenceTypeText" Type="Edm.String" sap:label="Reference Text" sap:quickinfo="Reference Type Text"/>
+				<Property MaxLength="30" Name="PaymentReference" Type="Edm.String" sap:display-format="UpperCase" sap:label="Payment Reference"/>
+				<Property MaxLength="35" Name="CustomerSupplierAccount" Type="Edm.String" sap:display-format="UpperCase" sap:label="Account Number" sap:text="FinancialAccountTypeName"/>
+				<Property MaxLength="60" Name="FinancialAccountTypeName" Type="Edm.String" sap:label="FinAccTypeName" sap:quickinfo="Financial Account Type Name"/>
+				<Property MaxLength="50" Name="DocumentItemText" Type="Edm.String" sap:label="Text" sap:quickinfo="Item Text"/>
+				<Property MaxLength="4" Name="PayingCompanyCode" Type="Edm.String" sap:display-format="UpperCase" sap:label="Paying Company Code" sap:text="PayingCompanyCodeName" sap:value-list="standard"/>
+				<Property MaxLength="25" Name="PayingCompanyCodeName" Type="Edm.String" sap:label="Company Name" sap:quickinfo="Name of Company Code or Company"/>
+				<Property MaxLength="5" Name="HouseBank" Type="Edm.String" sap:display-format="UpperCase" sap:label="House Bank" sap:quickinfo="House Bank Key" sap:text="BankName" sap:value-list="standard"/>
+				<Property Name="CreationDateTime" Precision="7" Type="Edm.DateTimeOffset" sap:label="Created On" sap:quickinfo="Creation Date and Time"/>
+				<Property MaxLength="60" Name="BankName" Type="Edm.String" sap:label="Bank Name" sap:quickinfo="Name of Bank"/>
+				<Property MaxLength="5" Name="HouseBankAccount" Type="Edm.String" sap:display-format="UpperCase" sap:label="Account ID" sap:quickinfo="ID for account details" sap:value-list="standard"/>
+				<Property MaxLength="10" Name="PaymentMethod" Type="Edm.String" sap:display-format="UpperCase" sap:label="Payment Methods" sap:quickinfo="List of Respected Payment Methods" sap:text="PaymentMethodName"/>
+				<Property MaxLength="30" Name="PaymentMethodName" Type="Edm.String" sap:display-format="UpperCase" sap:label="Payment Method Name"/>
+				<Property Name="IsSinglePayment" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Single Payment" sap:quickinfo="Indicator: Individual Payment?"/>
+				<Property Name="ValueDate" Precision="0" Type="Edm.DateTime" sap:display-format="Date" sap:label="Value Date" sap:quickinfo="Value Date for the Sending Bank"/>
+				<Property Name="PaymentRequestPostingDate" Precision="0" Type="Edm.DateTime" sap:display-format="Date" sap:label="Posting Date" sap:quickinfo="Day on Which Payment Request Was Posted"/>
+				<Property MaxLength="2" Name="DataExchangeInstruction" Type="Edm.String" sap:display-format="UpperCase" sap:label="Instruction key" sap:quickinfo="Instruction key for data medium exchange" sap:value-list="standard"/>
+				<Property Name="IsUrgentPayment" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Urgent" sap:quickinfo="Urgent Payment"/>
+				<Property MaxLength="3" Name="StateCentralBankPaymentReason" Type="Edm.String" sap:display-format="UpperCase" sap:label="Central Bk Indicator" sap:quickinfo="State Central Bank Indicator" sap:value-list="standard"/>
+				<Property Name="LastChangeDateTime" Precision="7" Type="Edm.DateTimeOffset" sap:label="Changed On" sap:quickinfo="Change Date and Time"/>
+				<Property MaxLength="8" Name="PaymentRequestOrigin" Type="Edm.String" sap:display-format="UpperCase" sap:label="Origin" sap:quickinfo="Origin Indicator" sap:value-list="standard"/>
+				<Property Name="PaytReqIsReleasedForPosting" Type="Edm.Boolean" sap:creatable="false" sap:display-format="UpperCase" sap:label="Released for Posting" sap:quickinfo="Indicator: Released for Posting" sap:updatable="false"/>
+				<Property Name="PaytReqIsCompleted" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Is Complete" sap:quickinfo="Indicator: Complete"/>
+				<Property Name="PaytReqIsReleasedForPayment" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Released for Payment" sap:quickinfo="Indicator: Released for Payment"/>
+				<Property Name="IsReversed" Type="Edm.Boolean" sap:creatable="false" sap:display-format="UpperCase" sap:label="Is Reversed" sap:quickinfo="Indicator: Payment Request Is Reversed" sap:updatable="false"/>
+				<Property MaxLength="2" Name="ReversalReason" Type="Edm.String" sap:creatable="false" sap:display-format="UpperCase" sap:label="Reversal Reason" sap:quickinfo="Reason for Reversal" sap:updatable="false" sap:value-list="standard"/>
+				<Property MaxLength="12" Name="LastChangedByUser" Type="Edm.String" sap:display-format="UpperCase" sap:label="Changed By" sap:value-list="standard"/>
+				<Property MaxLength="30" Name="SystemStatusName" Type="Edm.String" sap:label="Status" sap:quickinfo="Object status"/>
+				<Property MaxLength="4" Name="CompanyCode" Type="Edm.String" sap:display-format="UpperCase" sap:label="Company Code" sap:text="CompanyCodeName" sap:value-list="standard"/>
+				<Property MaxLength="25" Name="CompanyCodeName" Type="Edm.String" sap:label="Company Name" sap:quickinfo="Name of Company Code or Company"/>
+			</EntityType>
+			<EntityType Name="C_PaytReqReversalReasonVHType" sap:content-version="1" sap:label="Payt Req Reversal Reason Value Help" sap:value-list="true">
+				<Key>
+					<PropertyRef Name="ReversalReason"/>
+				</Key>
+				<Property MaxLength="2" Name="ReversalReason" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="Reversal Reason" sap:quickinfo="Reason for Reversal" sap:value-list="standard"/>
+				<Property MaxLength="40" Name="ReversalReasonName" Type="Edm.String" sap:label="Reversal Reason Name"/>
+			</EntityType>
+			<EntityType Name="VL_CT_TOBJ" sap:content-version="1" sap:value-list="true">
+				<Key>
+					<PropertyRef Name="OBJCT"/>
+				</Key>
+				<Property MaxLength="10" Name="OBJCT" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="Object" sap:sortable="false"/>
+				<Property MaxLength="60" Name="TTEXT" Type="Edm.String" sap:label="Text" sap:sortable="false"/>
+			</EntityType>
+			<EntityType Name="VL_SH_H_TACT" sap:content-version="1" sap:value-list="true">
+				<Key>
+					<PropertyRef Name="ACTVT"/>
+				</Key>
+				<Property MaxLength="2" Name="ACTVT" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="Activity" sap:sortable="false"/>
+				<Property MaxLength="30" Name="LTEXT" Type="Edm.String" sap:label="Text" sap:sortable="false"/>
+			</EntityType>
+			<EntityType Name="VL_CH_PAYRQ" sap:content-version="1" sap:value-list="true">
+				<Key>
+					<PropertyRef Name="KEYNO"/>
+				</Key>
+				<Property MaxLength="10" Name="KEYNO" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="Key number" sap:sortable="false"/>
+			</EntityType>
+			<EntityType Name="VL_SH_H_TGSB" sap:content-version="1" sap:value-list="true">
+				<Key>
+					<PropertyRef Name="GSBER"/>
+				</Key>
+				<Property MaxLength="4" Name="GSBER" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="Business Area" sap:sortable="false"/>
+				<Property MaxLength="30" Name="GTEXT" Type="Edm.String" sap:label="BA Description" sap:sortable="false"/>
+			</EntityType>
+			<EntityType Name="VL_CT_TCURC" sap:content-version="1" sap:value-list="true">
+				<Key>
+					<PropertyRef Name="WAERS"/>
+				</Key>
+				<Property MaxLength="5" Name="WAERS" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="Currency" sap:semantics="currency-code" sap:sortable="false"/>
+				<Property MaxLength="40" Name="LTEXT" Type="Edm.String" sap:label="Long Text" sap:sortable="false"/>
+			</EntityType>
+			<EntityType Name="VL_CT_T005" sap:content-version="1" sap:value-list="true">
+				<Key>
+					<PropertyRef Name="LAND1"/>
+				</Key>
+				<Property MaxLength="3" Name="LAND1" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="Country" sap:sortable="false"/>
+				<Property MaxLength="15" Name="LANDX" Type="Edm.String" sap:label="Name" sap:sortable="false"/>
+			</EntityType>
+			<EntityType Name="VL_CH_USR02" sap:content-version="1" sap:value-list="true">
+				<Key>
+					<PropertyRef Name="BNAME"/>
+				</Key>
+				<Property MaxLength="12" Name="BNAME" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="User" sap:sortable="false"/>
+			</EntityType>
+			<EntityType Name="VL_CT_T005S" sap:content-version="1" sap:value-list="true">
+				<Key>
+					<PropertyRef Name="LAND1"/>
+					<PropertyRef Name="BLAND"/>
+				</Key>
+				<Property MaxLength="3" Name="LAND1" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="Country" sap:sortable="false" sap:value-list="standard"/>
+				<Property MaxLength="3" Name="BLAND" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="Region" sap:sortable="false"/>
+				<Property MaxLength="20" Name="BEZEI" Type="Edm.String" sap:label="Description" sap:sortable="false"/>
+			</EntityType>
+			<EntityType Name="VL_SH_H_T002" sap:content-version="1" sap:value-list="true">
+				<Key>
+					<PropertyRef Name="SPRAS"/>
+				</Key>
+				<Property MaxLength="2" Name="SPRAS" Nullable="false" Type="Edm.String" sap:label="Language" sap:sortable="false"/>
+				<Property MaxLength="16" Name="SPTXT" Type="Edm.String" sap:label="Name" sap:sortable="false"/>
+			</EntityType>
+			<EntityType Name="VL_CH_BNKA" sap:content-version="1" sap:value-list="true">
+				<Key>
+					<PropertyRef Name="BANKS"/>
+					<PropertyRef Name="BANKL"/>
+				</Key>
+				<Property MaxLength="3" Name="BANKS" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="Bank Country" sap:sortable="false" sap:value-list="standard"/>
+				<Property MaxLength="15" Name="BANKL" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="Bank Key" sap:sortable="false"/>
+			</EntityType>
+			<EntityType Name="VL_SH_H_T001" sap:content-version="1" sap:value-list="true">
+				<Key>
+					<PropertyRef Name="BUKRS"/>
+				</Key>
+				<Property MaxLength="4" Name="BUKRS" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="Company Code" sap:sortable="false"/>
+				<Property MaxLength="25" Name="BUTXT" Type="Edm.String" sap:label="Company Name" sap:sortable="false"/>
+				<Property MaxLength="25" Name="ORT01" Type="Edm.String" sap:label="City" sap:sortable="false"/>
+				<Property MaxLength="5" Name="WAERS" Type="Edm.String" sap:display-format="UpperCase" sap:label="Currency" sap:semantics="currency-code" sap:sortable="false" sap:value-list="standard"/>
+			</EntityType>
+			<EntityType Name="VL_SH_H_T012" sap:content-version="1" sap:value-list="true">
+				<Key>
+					<PropertyRef Name="BUKRS"/>
+					<PropertyRef Name="HBKID"/>
+				</Key>
+				<Property MaxLength="60" Name="BANKA" Type="Edm.String" sap:filterable="false" sap:label="Bank Name" sap:sortable="false"/>
+				<Property MaxLength="35" Name="ORT01" Type="Edm.String" sap:filterable="false" sap:label="City" sap:sortable="false"/>
+				<Property MaxLength="4" Name="BUKRS" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="Company Code" sap:sortable="false" sap:value-list="standard"/>
+				<Property MaxLength="5" Name="HBKID" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="House Bank" sap:sortable="false"/>
+				<Property MaxLength="3" Name="BANKS" Type="Edm.String" sap:display-format="UpperCase" sap:label="Bank Country" sap:sortable="false" sap:value-list="standard"/>
+				<Property MaxLength="15" Name="BANKL" Type="Edm.String" sap:display-format="UpperCase" sap:label="Bank Key" sap:sortable="false"/>
+			</EntityType>
+			<EntityType Name="VL_SH_H_T012K" sap:content-version="1" sap:value-list="true">
+				<Key>
+					<PropertyRef Name="BUKRS"/>
+					<PropertyRef Name="HBKID"/>
+					<PropertyRef Name="HKTID"/>
+				</Key>
+				<Property MaxLength="4" Name="BUKRS" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="Company Code" sap:sortable="false" sap:value-list="standard"/>
+				<Property MaxLength="5" Name="HBKID" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="House Bank" sap:sortable="false" sap:value-list="standard"/>
+				<Property MaxLength="5" Name="HKTID" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="Account ID" sap:sortable="false"/>
+				<Property MaxLength="50" Name="TEXT1" Type="Edm.String" sap:label="Description" sap:sortable="false"/>
+			</EntityType>
+			<EntityType Name="VL_SH_H_T015W" sap:content-version="1" sap:value-list="true">
+				<Key>
+					<PropertyRef Name="DTAWS"/>
+					<PropertyRef Name="BANKS"/>
+					<PropertyRef Name="ZLSCH"/>
+				</Key>
+				<Property MaxLength="2" Name="DTAWS" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="Instruction" sap:sortable="false"/>
+				<Property MaxLength="25" Name="DTZUS" Type="Edm.String" sap:label="Additional Info" sap:sortable="false"/>
+				<Property MaxLength="3" Name="BANKS" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="Bank Country" sap:sortable="false" sap:value-list="standard"/>
+				<Property MaxLength="1" Name="ZLSCH" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="Pymt Meth." sap:sortable="false"/>
+			</EntityType>
+			<EntityType Name="VL_SH_H_T015L" sap:content-version="1" sap:value-list="true">
+				<Key>
+					<PropertyRef Name="LZBKZ"/>
+				</Key>
+				<Property MaxLength="3" Name="LZBKZ" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="Cen.bank ind" sap:sortable="false"/>
+				<Property MaxLength="3" Name="LVAWV" Type="Edm.String" sap:display-format="NonNegative" sap:label="Indicator acc.to service specificatns" sap:sortable="false"/>
+				<Property MaxLength="70" Name="ZWCK1" Type="Edm.String" sap:label="Reason f.pmnt" sap:sortable="false"/>
+			</EntityType>
+			<EntityType Name="VL_CT_TFIBLORIGIN" sap:content-version="1" sap:value-list="true">
+				<Key>
+					<PropertyRef Name="ORIGIN"/>
+				</Key>
+				<Property MaxLength="8" Name="ORIGIN" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="Origin" sap:sortable="false"/>
+				<Property MaxLength="40" Name="ORIGIN_T" Type="Edm.String" sap:label="Name" sap:sortable="false"/>
+			</EntityType>
+			<EntityType Name="VL_CT_T041C" sap:content-version="1" sap:value-list="true">
+				<Key>
+					<PropertyRef Name="STGRD"/>
+				</Key>
+				<Property MaxLength="2" Name="STGRD" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="Reversal Reason" sap:sortable="false"/>
+				<Property MaxLength="40" Name="TXT40" Type="Edm.String" sap:label="Text" sap:sortable="false"/>
+			</EntityType>
+			<EntityType Name="VL_CT_T100A" sap:content-version="1" sap:value-list="true">
+				<Key>
+					<PropertyRef Name="ARBGB"/>
+				</Key>
+				<Property MaxLength="20" Name="ARBGB" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="Area" sap:sortable="false"/>
+				<Property MaxLength="60" Name="STEXT" Type="Edm.String" sap:label="Short Description" sap:sortable="false"/>
+			</EntityType>
+			<EntityType Name="VL_CH_BALHDR" sap:content-version="1" sap:value-list="true">
+				<Key>
+					<PropertyRef Name="LOGNUMBER"/>
+				</Key>
+				<Property MaxLength="20" Name="LOGNUMBER" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="Log number" sap:sortable="false"/>
+			</EntityType>
+			<EntityType Name="VL_CH_BALM" sap:content-version="1" sap:value-list="true">
+				<Key>
+					<PropertyRef Name="LOGNUMBER"/>
+					<PropertyRef Name="MSGNUMBER"/>
+				</Key>
+				<Property MaxLength="20" Name="LOGNUMBER" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="Log number" sap:sortable="false" sap:value-list="standard"/>
+				<Property MaxLength="6" Name="MSGNUMBER" Nullable="false" Type="Edm.String" sap:display-format="NonNegative" sap:label="Message no." sap:sortable="false"/>
+			</EntityType>
+			<EntityType Name="VL_CH_DD03L" sap:content-version="1" sap:value-list="true">
+				<Key>
+					<PropertyRef Name="TABNAME"/>
+					<PropertyRef Name="FIELDNAME"/>
+					<PropertyRef Name="AS4LOCAL"/>
+					<PropertyRef Name="AS4VERS"/>
+					<PropertyRef Name="POSITION"/>
+				</Key>
+				<Property MaxLength="30" Name="TABNAME" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="Table Name" sap:sortable="false"/>
+				<Property MaxLength="30" Name="FIELDNAME" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="Field Name" sap:sortable="false"/>
+				<Property MaxLength="1" Name="AS4LOCAL" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="Activation Status" sap:sortable="false"/>
+				<Property MaxLength="4" Name="AS4VERS" Nullable="false" Type="Edm.String" sap:display-format="NonNegative" sap:label="Version" sap:sortable="false"/>
+				<Property MaxLength="4" Name="POSITION" Nullable="false" Type="Edm.String" sap:display-format="NonNegative" sap:label="Table position" sap:sortable="false"/>
+			</EntityType>
+			<EntityType Name="VL_CT_TBDLS" sap:content-version="1" sap:value-list="true">
+				<Key>
+					<PropertyRef Name="LOGSYS"/>
+				</Key>
+				<Property MaxLength="10" Name="LOGSYS" Nullable="false" Type="Edm.String" sap:display-format="UpperCase" sap:label="Logical System" sap:sortable="false"/>
+				<Property MaxLength="40" Name="STEXT" Type="Edm.String" sap:label="Text, 40 Characters Long" sap:sortable="false"/>
+			</EntityType>
+			<ComplexType Name="ReturnMessage">
+				<Property MaxLength="1" Name="Type" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Message type" sap:sortable="false" sap:updatable="false"/>
+				<Property MaxLength="20" Name="Id" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Message Class" sap:sortable="false" sap:updatable="false" sap:value-list="standard"/>
+				<Property MaxLength="3" Name="Number" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Message number" sap:sortable="false" sap:updatable="false"/>
+				<Property MaxLength="220" Name="Message" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Message text" sap:sortable="false" sap:updatable="false"/>
+				<Property MaxLength="20" Name="LogNo" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Log number" sap:sortable="false" sap:updatable="false" sap:value-list="standard"/>
+				<Property MaxLength="6" Name="LogMsgNo" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Message no." sap:sortable="false" sap:updatable="false" sap:value-list="standard"/>
+				<Property MaxLength="50" Name="MessageV1" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Message Variable" sap:sortable="false" sap:updatable="false"/>
+				<Property MaxLength="50" Name="MessageV2" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Message Variable" sap:sortable="false" sap:updatable="false"/>
+				<Property MaxLength="50" Name="MessageV3" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Message Variable" sap:sortable="false" sap:updatable="false"/>
+				<Property MaxLength="50" Name="MessageV4" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Message Variable" sap:sortable="false" sap:updatable="false"/>
+				<Property MaxLength="32" Name="Parameter" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Parameter Name" sap:sortable="false" sap:updatable="false"/>
+				<Property Name="Row" Nullable="false" Type="Edm.Int32" sap:creatable="false" sap:filterable="false" sap:label="Parameter line" sap:sortable="false" sap:updatable="false"/>
+				<Property MaxLength="30" Name="Field" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Field name" sap:sortable="false" sap:updatable="false" sap:value-list="standard"/>
+				<Property MaxLength="10" Name="System" Nullable="false" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Logical system" sap:sortable="false" sap:updatable="false" sap:value-list="standard"/>
+			</ComplexType>
+			<EntityContainer Name="FAP_PROCESS_FF_PAYMENTS_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+				<EntitySet EntityType="FAP_PROCESS_FF_PAYMENTS_SRV.UserActivityType" Name="UserActivity" sap:content-version="1" sap:creatable="false" sap:deletable="false" sap:pageable="false" sap:updatable="false"/>
+				<EntitySet EntityType="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType" Name="C_PaymentRequest" sap:content-version="1" sap:creatable="false" sap:deletable="false" sap:searchable="true" sap:updatable="false"/>
+				<EntitySet EntityType="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaytReqReversalReasonVHType" Name="C_PaytReqReversalReasonVH" sap:content-version="1" sap:creatable="false" sap:deletable="false" sap:updatable="false"/>
+				<EntitySet EntityType="FAP_PROCESS_FF_PAYMENTS_SRV.VL_CT_TOBJ" Name="VL_CT_TOBJ" sap:content-version="1" sap:countable="false" sap:creatable="false" sap:deletable="false" sap:semantics="aggregate" sap:updatable="false"/>
+				<EntitySet EntityType="FAP_PROCESS_FF_PAYMENTS_SRV.VL_SH_H_TACT" Name="VL_SH_H_TACT" sap:content-version="1" sap:countable="false" sap:creatable="false" sap:deletable="false" sap:updatable="false"/>
+				<EntitySet EntityType="FAP_PROCESS_FF_PAYMENTS_SRV.VL_CH_PAYRQ" Name="VL_CH_PAYRQ" sap:content-version="1" sap:countable="false" sap:creatable="false" sap:deletable="false" sap:semantics="aggregate" sap:updatable="false"/>
+				<EntitySet EntityType="FAP_PROCESS_FF_PAYMENTS_SRV.VL_SH_H_TGSB" Name="VL_SH_H_TGSB" sap:content-version="1" sap:countable="false" sap:creatable="false" sap:deletable="false" sap:updatable="false"/>
+				<EntitySet EntityType="FAP_PROCESS_FF_PAYMENTS_SRV.VL_CT_TCURC" Name="VL_CT_TCURC" sap:content-version="1" sap:countable="false" sap:creatable="false" sap:deletable="false" sap:semantics="aggregate" sap:updatable="false"/>
+				<EntitySet EntityType="FAP_PROCESS_FF_PAYMENTS_SRV.VL_CT_T005" Name="VL_CT_T005" sap:content-version="1" sap:countable="false" sap:creatable="false" sap:deletable="false" sap:semantics="aggregate" sap:updatable="false"/>
+				<EntitySet EntityType="FAP_PROCESS_FF_PAYMENTS_SRV.VL_CH_USR02" Name="VL_CH_USR02" sap:content-version="1" sap:countable="false" sap:creatable="false" sap:deletable="false" sap:semantics="aggregate" sap:updatable="false"/>
+				<EntitySet EntityType="FAP_PROCESS_FF_PAYMENTS_SRV.VL_CT_T005S" Name="VL_CT_T005S" sap:content-version="1" sap:countable="false" sap:creatable="false" sap:deletable="false" sap:semantics="aggregate" sap:updatable="false"/>
+				<EntitySet EntityType="FAP_PROCESS_FF_PAYMENTS_SRV.VL_SH_H_T002" Name="VL_SH_H_T002" sap:content-version="1" sap:countable="false" sap:creatable="false" sap:deletable="false" sap:updatable="false"/>
+				<EntitySet EntityType="FAP_PROCESS_FF_PAYMENTS_SRV.VL_CH_BNKA" Name="VL_CH_BNKA" sap:content-version="1" sap:countable="false" sap:creatable="false" sap:deletable="false" sap:semantics="aggregate" sap:updatable="false"/>
+				<EntitySet EntityType="FAP_PROCESS_FF_PAYMENTS_SRV.VL_SH_H_T001" Name="VL_SH_H_T001" sap:content-version="1" sap:countable="false" sap:creatable="false" sap:deletable="false" sap:updatable="false"/>
+				<EntitySet EntityType="FAP_PROCESS_FF_PAYMENTS_SRV.VL_SH_H_T012" Name="VL_SH_H_T012" sap:content-version="1" sap:countable="false" sap:creatable="false" sap:deletable="false" sap:updatable="false"/>
+				<EntitySet EntityType="FAP_PROCESS_FF_PAYMENTS_SRV.VL_SH_H_T012K" Name="VL_SH_H_T012K" sap:content-version="1" sap:countable="false" sap:creatable="false" sap:deletable="false" sap:updatable="false"/>
+				<EntitySet EntityType="FAP_PROCESS_FF_PAYMENTS_SRV.VL_SH_H_T015W" Name="VL_SH_H_T015W" sap:content-version="1" sap:countable="false" sap:creatable="false" sap:deletable="false" sap:updatable="false"/>
+				<EntitySet EntityType="FAP_PROCESS_FF_PAYMENTS_SRV.VL_SH_H_T015L" Name="VL_SH_H_T015L" sap:content-version="1" sap:countable="false" sap:creatable="false" sap:deletable="false" sap:updatable="false"/>
+				<EntitySet EntityType="FAP_PROCESS_FF_PAYMENTS_SRV.VL_CT_TFIBLORIGIN" Name="VL_CT_TFIBLORIGIN" sap:content-version="1" sap:countable="false" sap:creatable="false" sap:deletable="false" sap:semantics="aggregate" sap:updatable="false"/>
+				<EntitySet EntityType="FAP_PROCESS_FF_PAYMENTS_SRV.VL_CT_T041C" Name="VL_CT_T041C" sap:content-version="1" sap:countable="false" sap:creatable="false" sap:deletable="false" sap:semantics="aggregate" sap:updatable="false"/>
+				<EntitySet EntityType="FAP_PROCESS_FF_PAYMENTS_SRV.VL_CT_T100A" Name="VL_CT_T100A" sap:content-version="1" sap:countable="false" sap:creatable="false" sap:deletable="false" sap:semantics="aggregate" sap:updatable="false"/>
+				<EntitySet EntityType="FAP_PROCESS_FF_PAYMENTS_SRV.VL_CH_BALHDR" Name="VL_CH_BALHDR" sap:content-version="1" sap:countable="false" sap:creatable="false" sap:deletable="false" sap:semantics="aggregate" sap:updatable="false"/>
+				<EntitySet EntityType="FAP_PROCESS_FF_PAYMENTS_SRV.VL_CH_BALM" Name="VL_CH_BALM" sap:content-version="1" sap:countable="false" sap:creatable="false" sap:deletable="false" sap:semantics="aggregate" sap:updatable="false"/>
+				<EntitySet EntityType="FAP_PROCESS_FF_PAYMENTS_SRV.VL_CH_DD03L" Name="VL_CH_DD03L" sap:content-version="1" sap:countable="false" sap:creatable="false" sap:deletable="false" sap:semantics="aggregate" sap:updatable="false"/>
+				<EntitySet EntityType="FAP_PROCESS_FF_PAYMENTS_SRV.VL_CT_TBDLS" Name="VL_CT_TBDLS" sap:content-version="1" sap:countable="false" sap:creatable="false" sap:deletable="false" sap:semantics="aggregate" sap:updatable="false"/>
+				<FunctionImport Name="releasePayment" ReturnType="FAP_PROCESS_FF_PAYMENTS_SRV.ReturnMessage" m:HttpMethod="GET" sap:label="Release Payment">
+					<Parameter MaxLength="10" Mode="In" Name="RequestId" Type="Edm.String"/>
+				</FunctionImport>
+				<FunctionImport EntitySet="UserActivity" Name="getActivity" ReturnType="Collection(FAP_PROCESS_FF_PAYMENTS_SRV.UserActivityType)" m:HttpMethod="GET" sap:label="Get Auth. Activities for Payment Req"/>
+				<FunctionImport Name="reversePayment" ReturnType="FAP_PROCESS_FF_PAYMENTS_SRV.ReturnMessage" m:HttpMethod="GET" sap:label="Reverse Payment">
+					<Parameter Mode="In" Name="ReversalDate" Precision="0" Type="Edm.DateTime"/>
+					<Parameter MaxLength="2" Mode="In" Name="ReversalReason" Type="Edm.String"/>
+					<Parameter MaxLength="10" Mode="In" Name="RequestId" Type="Edm.String"/>
+				</FunctionImport>
+				<FunctionImport Name="postPayment" ReturnType="FAP_PROCESS_FF_PAYMENTS_SRV.ReturnMessage" m:HttpMethod="GET" sap:label="Release Payment">
+					<Parameter MaxLength="10" Mode="In" Name="RequestId" Type="Edm.String"/>
+				</FunctionImport>
+			</EntityContainer>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType/ReversalReason" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="Common.ValueList">
+					<Record>
+						<PropertyValue Property="Label" String="Payt Req Reversal Reason Value Help"/>
+						<PropertyValue Property="CollectionPath" String="C_PaytReqReversalReasonVH"/>
+						<PropertyValue Bool="false" Property="SearchSupported"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="ReversalReason"/>
+									<PropertyValue Property="ValueListProperty" String="ReversalReason"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="ReversalReasonName"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.UserActivityType/Brobj" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath" String="VL_CT_TOBJ"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="Brobj"/>
+									<PropertyValue Property="ValueListProperty" String="OBJCT"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="TTEXT"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.UserActivityType/Actvt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="Label" String="Generated help view for check table TACT"/>
+						<PropertyValue Property="CollectionPath" String="VL_SH_H_TACT"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="Actvt"/>
+									<PropertyValue Property="ValueListProperty" String="ACTVT"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="LTEXT"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType/PaymentRequest" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath" String="VL_CH_PAYRQ"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="PaymentRequest"/>
+									<PropertyValue Property="ValueListProperty" String="KEYNO"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType/BusinessArea" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="Label" String="Help View for Business Areas"/>
+						<PropertyValue Property="CollectionPath" String="VL_SH_H_TGSB"/>
+						<PropertyValue Bool="true" Property="SearchSupported"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="BusinessArea"/>
+									<PropertyValue Property="ValueListProperty" String="GSBER"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="GTEXT"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType/PaymentRequestCurrency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath" String="VL_CT_TCURC"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="PaymentRequestCurrency"/>
+									<PropertyValue Property="ValueListProperty" String="WAERS"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="LTEXT"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType/CompanyCodeCurrency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath" String="VL_CT_TCURC"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="CompanyCodeCurrency"/>
+									<PropertyValue Property="ValueListProperty" String="WAERS"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="LTEXT"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType/PayeeCountry" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath" String="VL_CT_T005"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="PayeeCountry"/>
+									<PropertyValue Property="ValueListProperty" String="LAND1"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="LANDX"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType/CreatedByUser" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath" String="VL_CH_USR02"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="CreatedByUser"/>
+									<PropertyValue Property="ValueListProperty" String="BNAME"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType/PayeeRegion" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath" String="VL_CT_T005S"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="PayeeCountry"/>
+									<PropertyValue Property="ValueListProperty" String="LAND1"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="PayeeRegion"/>
+									<PropertyValue Property="ValueListProperty" String="BLAND"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="BEZEI"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType/PayeeLanguage" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="Label" String="Language flag"/>
+						<PropertyValue Property="CollectionPath" String="VL_SH_H_T002"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="PayeeLanguage"/>
+									<PropertyValue Property="ValueListProperty" String="SPRAS"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="SPTXT"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType/PayeeBankCountry" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath" String="VL_CT_T005"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="PayeeBankCountry"/>
+									<PropertyValue Property="ValueListProperty" String="LAND1"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="LANDX"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType/PayeeBankInternalID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath" String="VL_CH_BNKA"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="PayeeBankCountry"/>
+									<PropertyValue Property="ValueListProperty" String="BANKS"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="PayeeBankInternalID"/>
+									<PropertyValue Property="ValueListProperty" String="BANKL"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType/PayingCompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="Label" String="Company Codes"/>
+						<PropertyValue Property="CollectionPath" String="VL_SH_H_T001"/>
+						<PropertyValue Bool="true" Property="SearchSupported"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="PayingCompanyCode"/>
+									<PropertyValue Property="ValueListProperty" String="BUKRS"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="BUTXT"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="ORT01"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="WAERS"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType/HouseBank" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="Label" String="Help_View for Table T012"/>
+						<PropertyValue Property="CollectionPath" String="VL_SH_H_T012"/>
+						<PropertyValue Bool="true" Property="SearchSupported"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="PayingCompanyCode"/>
+									<PropertyValue Property="ValueListProperty" String="BUKRS"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="HouseBank"/>
+									<PropertyValue Property="ValueListProperty" String="HBKID"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="BANKS"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="BANKL"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="BANKA"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="ORT01"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType/HouseBankAccount" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="Label" String="Help_View for Table T012K"/>
+						<PropertyValue Property="CollectionPath" String="VL_SH_H_T012K"/>
+						<PropertyValue Bool="true" Property="SearchSupported"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="PayingCompanyCode"/>
+									<PropertyValue Property="ValueListProperty" String="BUKRS"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="HouseBank"/>
+									<PropertyValue Property="ValueListProperty" String="HBKID"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="HouseBankAccount"/>
+									<PropertyValue Property="ValueListProperty" String="HKTID"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="TEXT1"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType/DataExchangeInstruction" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="Label" String="Help_View for T015W"/>
+						<PropertyValue Property="CollectionPath" String="VL_SH_H_T015W"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterIn">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="PayeeBankCountry"/>
+									<PropertyValue Property="ValueListProperty" String="BANKS"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="DataExchangeInstruction"/>
+									<PropertyValue Property="ValueListProperty" String="DTAWS"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="DTZUS"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType/StateCentralBankPaymentReason" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="Label" String="Help_View for Table T015L"/>
+						<PropertyValue Property="CollectionPath" String="VL_SH_H_T015L"/>
+						<PropertyValue Bool="true" Property="SearchSupported"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="StateCentralBankPaymentReason"/>
+									<PropertyValue Property="ValueListProperty" String="LZBKZ"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="LVAWV"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="ZWCK1"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType/PaymentRequestOrigin" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath" String="VL_CT_TFIBLORIGIN"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="PaymentRequestOrigin"/>
+									<PropertyValue Property="ValueListProperty" String="ORIGIN"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="ORIGIN_T"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType/ReversalReason" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath" String="VL_CT_T041C"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="ReversalReason"/>
+									<PropertyValue Property="ValueListProperty" String="STGRD"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="TXT40"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType/LastChangedByUser" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath" String="VL_CH_USR02"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="LastChangedByUser"/>
+									<PropertyValue Property="ValueListProperty" String="BNAME"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType/CompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="Label" String="Company Codes"/>
+						<PropertyValue Property="CollectionPath" String="VL_SH_H_T001"/>
+						<PropertyValue Bool="true" Property="SearchSupported"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="CompanyCode"/>
+									<PropertyValue Property="ValueListProperty" String="BUKRS"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="BUTXT"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="ORT01"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="WAERS"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaytReqReversalReasonVHType/ReversalReason" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath" String="VL_CT_T041C"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="ReversalReason"/>
+									<PropertyValue Property="ValueListProperty" String="STGRD"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="TXT40"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.ReturnMessage/Id" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath" String="VL_CT_T100A"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="Id"/>
+									<PropertyValue Property="ValueListProperty" String="ARBGB"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="STEXT"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.ReturnMessage/LogNo" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath" String="VL_CH_BALHDR"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="LogNo"/>
+									<PropertyValue Property="ValueListProperty" String="LOGNUMBER"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.ReturnMessage/LogMsgNo" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath" String="VL_CH_BALM"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="LogNo"/>
+									<PropertyValue Property="ValueListProperty" String="LOGNUMBER"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="LogMsgNo"/>
+									<PropertyValue Property="ValueListProperty" String="MSGNUMBER"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.ReturnMessage/Field" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath" String="VL_CH_DD03L"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="TABNAME"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="Field"/>
+									<PropertyValue Property="ValueListProperty" String="FIELDNAME"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="AS4LOCAL"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="AS4VERS"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="POSITION"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.ReturnMessage/System" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath" String="VL_CT_TBDLS"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="System"/>
+									<PropertyValue Property="ValueListProperty" String="LOGSYS"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="STEXT"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.VL_CT_T005S/LAND1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath" String="VL_CT_T005"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="LAND1"/>
+									<PropertyValue Property="ValueListProperty" String="LAND1"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="LANDX"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.VL_CH_BNKA/BANKS" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath" String="VL_CT_T005"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="BANKS"/>
+									<PropertyValue Property="ValueListProperty" String="LAND1"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="LANDX"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.VL_SH_H_T001/WAERS" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath" String="VL_CT_TCURC"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="WAERS"/>
+									<PropertyValue Property="ValueListProperty" String="WAERS"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="LTEXT"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.VL_SH_H_T012/BUKRS" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="Label" String="Company Codes"/>
+						<PropertyValue Property="CollectionPath" String="VL_SH_H_T001"/>
+						<PropertyValue Bool="true" Property="SearchSupported"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="BUKRS"/>
+									<PropertyValue Property="ValueListProperty" String="BUKRS"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="BUTXT"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="ORT01"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="WAERS"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.VL_SH_H_T012/BANKS" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath" String="VL_CT_T005"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="BANKS"/>
+									<PropertyValue Property="ValueListProperty" String="LAND1"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="LANDX"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.VL_SH_H_T012K/BUKRS" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="Label" String="Company Codes"/>
+						<PropertyValue Property="CollectionPath" String="VL_SH_H_T001"/>
+						<PropertyValue Bool="true" Property="SearchSupported"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="BUKRS"/>
+									<PropertyValue Property="ValueListProperty" String="BUKRS"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="BUTXT"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="ORT01"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="WAERS"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.VL_SH_H_T012K/HBKID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="Label" String="Help_View for Table T012"/>
+						<PropertyValue Property="CollectionPath" String="VL_SH_H_T012"/>
+						<PropertyValue Bool="true" Property="SearchSupported"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="BUKRS"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="HBKID"/>
+									<PropertyValue Property="ValueListProperty" String="HBKID"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="BANKS"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="BANKL"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="BANKA"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="ORT01"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.VL_SH_H_T015W/BANKS" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath" String="VL_CT_T005"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="BANKS"/>
+									<PropertyValue Property="ValueListProperty" String="LAND1"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="LANDX"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.VL_CH_BALM/LOGNUMBER" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath" String="VL_CH_BALHDR"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="LOGNUMBER"/>
+									<PropertyValue Property="ValueListProperty" String="LOGNUMBER"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Qualifier="HEADER1" Term="com.sap.vocabularies.UI.v1.FieldGroup">
+					<Record>
+						<PropertyValue Property="Label" String="Company Code"/>
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="com.sap.vocabularies.UI.v1.DataField">
+									<PropertyValue Path="CompanyCode" Property="Value"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.UI.v1.DataField">
+									<PropertyValue Path="PayeeName" Property="Value"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Qualifier="HEADER2" Term="com.sap.vocabularies.UI.v1.FieldGroup">
+					<Record>
+						<PropertyValue Property="Label" String="Status"/>
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="com.sap.vocabularies.UI.v1.DataField">
+									<PropertyValue Path="SystemStatusName" Property="Value"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.UI.v1.DataField">
+									<PropertyValue Path="CreationDateTime" Property="Value"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Qualifier="HEADER3" Term="com.sap.vocabularies.UI.v1.FieldGroup">
+					<Record>
+						<PropertyValue Property="Label" String="Created By"/>
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="com.sap.vocabularies.UI.v1.DataField">
+									<PropertyValue Path="CreatedByUser" Property="Value"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.UI.v1.DataField">
+									<PropertyValue Path="LastChangeDateTime" Property="Value"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Qualifier="HEADER4" Term="com.sap.vocabularies.UI.v1.FieldGroup">
+					<Record>
+						<PropertyValue Property="Label" String="Amount"/>
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="com.sap.vocabularies.UI.v1.DataField">
+									<PropertyValue Path="LastChangedByUser" Property="Value"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Qualifier="HEADER5" Term="com.sap.vocabularies.UI.v1.FieldGroup">
+					<Record>
+						<PropertyValue Property="Label" String="Amount"/>
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="com.sap.vocabularies.UI.v1.DataField">
+									<PropertyValue Path="PaymentRequestAmountInPaytCrcy" Property="Value"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="com.sap.vocabularies.UI.v1.HeaderFacets">
+					<Collection>
+						<Record Type="com.sap.vocabularies.UI.v1.CollectionFacet">
+							<PropertyValue Property="Label" String="Header_Data1"/>
+							<PropertyValue Property="ID" String="HEADERFAC1"/>
+							<PropertyValue Property="Facets">
+								<Collection>
+									<Record Type="com.sap.vocabularies.UI.v1.ReferenceFacet">
+										<PropertyValue AnnotationPath="@UI.FieldGroup#HEADER1" Property="Target"/>
+									</Record>
+									<Record Type="com.sap.vocabularies.UI.v1.ReferenceFacet">
+										<PropertyValue AnnotationPath="@UI.FieldGroup#HEADER2" Property="Target"/>
+									</Record>
+									<Record Type="com.sap.vocabularies.UI.v1.ReferenceFacet">
+										<PropertyValue AnnotationPath="@UI.FieldGroup#HEADER3" Property="Target"/>
+									</Record>
+									<Record Type="com.sap.vocabularies.UI.v1.ReferenceFacet">
+										<PropertyValue AnnotationPath="@UI.FieldGroup#HEADER4" Property="Target"/>
+									</Record>
+									<Record Type="com.sap.vocabularies.UI.v1.ReferenceFacet">
+										<PropertyValue AnnotationPath="@UI.FieldGroup#HEADER5" Property="Target"/>
+									</Record>
+								</Collection>
+							</PropertyValue>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+			<atom:link href="http://localhost/DUMMY_SERVICE/$metadata" rel="self" xmlns:atom="http://www.w3.org/2005/Atom"/>
+			<atom:link href="http://localhost/DUMMY_SERVICE/$metadata" rel="latest-version" xmlns:atom="http://www.w3.org/2005/Atom"/>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

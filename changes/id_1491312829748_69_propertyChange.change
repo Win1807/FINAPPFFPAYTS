@@ -1,0 +1,31 @@
+{
+	"fileName": "id_1491312829748_69_propertyChange",
+	"fileType": "change",
+	"changeType": "propertyChange",
+	"reference": "fin.ap.process.payments.Component",
+	"packageName": "$TMP",
+	"content": {
+		"property": "mode",
+		"oldValue": "SingleSelectLeft",
+		"newValue": "SingleSelectMaster"
+	},
+	"selector": {
+		"id": "fin.ap.process.payments::sap.suite.ui.generic.template.ListReport.view.ListReport::C_PaymentRequest--responsiveTable",
+		"type": "sap.m.Table",
+		"idIsLocal": false
+	},
+	"layer": "VENDOR",
+	"texts": {},
+	"namespace": "apps/fin.ap.process.payments/changes/",
+	"creation": "2017-04-04T13:33:52.521Z",
+	"originalLanguage": "EN",
+	"conditions": {},
+	"context": "",
+	"support": {
+		"generator": "Change.createInitialFileContent",
+		"service": "",
+		"user": "",
+		"sapui5Version": "1.44.9"
+	},
+	"dependentSelector": {}
+}

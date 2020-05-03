@@ -1,0 +1,42 @@
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:smart="sap.ui.comp.smartfield"
+	xmlns:f="sap.ui.layout.form"
+	>
+
+	<Dialog
+	    id="dialog"
+	    title="{dialog>/title}"
+	    type="Message"
+	    draggable="true"
+	>
+		<content>
+				<VBox>
+					<Text text="{dialog>/message}" />
+				</VBox>
+				<VBox visible="{dialog>/isReverse}" >
+					<Label text="{i18n>REVERSAL_DATE}" labelFor="reverseDatePicker" required="true" />
+					<DatePicker id="reverseDatePicker" dateValue="{dialog>/reversalDateValue}" change="onReversalDateChange" />
+					<Label text="{i18n>REVERSAL_REASON}" labelFor="reasonSelect" />
+					<Select id="reasonSelect" width="100%" />
+				</VBox>
+		</content>
+		<beginButton>
+			<Button
+				id="actionButton"
+				text="{dialog>/title}"
+				press="onActionPress"
+				enabled="{= ${dialog>/isReverse} === false ? true : ${dialog>/reversalDateIsValid} }"
+			/>
+		</beginButton>
+		<endButton>
+			<Button id="cancelButton" text="{i18n>CANCEL}" press="onCancelPress" />
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>
