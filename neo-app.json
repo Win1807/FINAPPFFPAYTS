@@ -1,0 +1,51 @@
+{
+  "welcomeFile": "index.html",
+  "routes": [
+    {
+      "path": "/sap/opu/odata",
+      "target": {
+        "type": "destination",
+        "name": "DT_ACCIONA",
+        "entryPath": "/sap/opu/odata"
+      },
+      "description": "DT_ACCIONA"
+    },
+    {
+      "path": "/sap/bc/ui5_ui5",
+      "target": {
+        "type": "destination",
+        "name": "DT_ACCIONA",
+        "entryPath": "/sap/bc/ui5_ui5"
+      },
+      "description": "DT_ACCIONA"
+    },
+    {
+      "path": "/resources",
+      "target": {
+        "type": "service",
+        "name": "sapui5",
+        "entryPath": "/resources"
+      },
+      "description": "SAPUI5 Resources"
+    },
+    {
+      "path": "/test-resources",
+      "target": {
+        "type": "service",
+        "name": "sapui5",
+        "entryPath": "/test-resources"
+      },
+      "description": "SAPUI5 Test Resources"
+    },
+    {
+      "path": "/resources/fin/ap/process/payments/Component",
+      "target": {
+        "type": "destination",
+        "name": "DT_ACCIONA",
+        "entryPath": "/sap/bc/lrep/flex/data/~L4ZjRWLJgAGFJdCh5CZzuYqPaIQ=~/fin.ap.process.payments.Component?version=7.0.8",
+        "preferLocal": true
+      },
+      "description": "fin/ap/process/payments/Component Reuse Library"
+    }
+  ]
+}

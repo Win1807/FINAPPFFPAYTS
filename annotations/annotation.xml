@@ -1,0 +1,178 @@
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+	<edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Uri="/sap/opu/odata/sap/FAP_PROCESS_FF_PAYMENTS_SRV/$metadata">
+		<edmx:Include xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Namespace="FAP_PROCESS_FF_PAYMENTS_SRV"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata-data-aggregation-ext/v4.0/cs02/vocabularies/Org.OData.Aggregation.V1.xml">
+		<edmx:Include Alias="Aggregation" Namespace="Org.OData.Aggregation.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Capabilities.V1.xml">
+		<edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470974/Common.xml?api=v2">
+		<edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470971/Communication.xml?api=v2">
+		<edmx:Include Alias="vCard" Namespace="com.sap.vocabularies.Communication.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Core.V1.xml">
+		<edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Measures.V1.xml">
+		<edmx:Include Alias="CQP" Namespace="Org.OData.Measures.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470968/UI.xml?api=v2">
+		<edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+	</edmx:Reference>
+	<edmx:DataServices>
+		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="fin.ap.process.payments.FAP_PROCESS_FF_PAYMENTS_SRV">
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType">
+				<Annotation Term="UI.FieldGroup" Qualifier="HEADER2">
+					<Record Type="UI.FieldGroupType">
+						<PropertyValue Property="Label" String="Status"/>
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value" Path="CreationDateTime"/>
+								</Record>
+								<Record Type="UI.DataFieldForAnnotation">
+									<PropertyValue Property="Label" String="{@i18n&gt;CREATED_BY}"/>
+									<PropertyValue Property="Target" AnnotationPath="to_UserContactCard/@vCard.Contact"/>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value" Path="LastChangeDateTime"/>
+								</Record>
+								<Record Type="UI.DataFieldForAnnotation">
+									<PropertyValue Property="Label" String="{@i18n&gt;CHANGED_BY}"/>
+									<PropertyValue Property="Target" AnnotationPath="to_ChangeUserContactCard/@vCard.Contact"/>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Value" Path="PaymentBatchStatusText"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.PresentationVariant">
+					<Record Type="UI.PresentationVariantType">
+						<PropertyValue Property="SortOrder">
+							<Collection>
+								<Record Type="Common.SortOrderType">
+									<PropertyValue Property="Property" PropertyPath="PaymentRequest"/>
+									<PropertyValue Property="Descending" Bool="true"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="RequestAtLeast">
+							<Collection>
+								<PropertyPath>CreatedByUser</PropertyPath>
+								<PropertyPath>LastChangedByUser</PropertyPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.Facets">
+					<Collection>
+						<Record Type="UI.CollectionFacet">
+							<PropertyValue Property="Label" String="{@i18n&gt;PAYMENT_REQUEST_TYPE}"/>
+							<PropertyValue Property="ID" String="PayrqTypeFAC"/>
+							<PropertyValue Property="Facets">
+								<Collection>
+									<Record Type="UI.ReferenceFacet">
+										<PropertyValue Property="ID" String="PayrqTypeGroup"/>
+										<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#PayrqTypeGroup"/>
+									</Record>
+								</Collection>
+							</PropertyValue>
+						</Record>
+						<Record Type="UI.CollectionFacet">
+							<PropertyValue Property="Label" String="{@i18n&gt;PAYEE}"/>
+							<PropertyValue Property="ID" String="PayeeFAC"/>
+							<PropertyValue Property="Facets">
+								<Collection>
+									<Record Type="UI.CollectionFacet">
+										<PropertyValue Property="Label" String="{@i18n&gt;PAYEE_NAME}"/>
+										<PropertyValue Property="ID" String="PayeeNameFAC"/>
+										<PropertyValue Property="Facets">
+											<Collection>
+												<Record Type="UI.ReferenceFacet">
+													<PropertyValue Property="ID" String="PayeeNameGroup"/>
+													<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#PayeeNameGroup"/>
+												</Record>
+											</Collection>
+										</PropertyValue>
+									</Record>
+									<Record Type="UI.CollectionFacet">
+										<PropertyValue Property="Label" String="{@i18n&gt;PAYEE_DETAILS}"/>
+										<PropertyValue Property="ID" String="PayeeDetailsFAC"/>
+										<PropertyValue Property="Facets">
+											<Collection>
+												<Record Type="UI.ReferenceFacet">
+													<PropertyValue Property="ID" String="PayeeDetailsGroup"/>
+													<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#PayeeDetailsGroup"/>
+													<Annotation Term="UI.PartOfPreview" Bool="false"/>
+												</Record>
+											</Collection>
+										</PropertyValue>
+									</Record>
+									<Record Type="UI.CollectionFacet">
+										<PropertyValue Property="Label" String="{@i18n&gt;PAYEE_BANK_DETAILS}"/>
+										<PropertyValue Property="ID" String="PayeeBankFAC"/>
+										<PropertyValue Property="Facets">
+											<Collection>
+												<Record Type="UI.ReferenceFacet">
+													<PropertyValue Property="ID" String="PayeeBankGroup"/>
+													<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#PayeeBankGroup"/>
+												</Record>
+											</Collection>
+										</PropertyValue>
+									</Record>
+								</Collection>
+							</PropertyValue>
+						</Record>
+						<Record Type="UI.CollectionFacet">
+							<PropertyValue Property="Label" String="{@i18n&gt;POSTING_DATA}"/>
+							<PropertyValue Property="ID" String="PostingDataFAC"/>
+							<PropertyValue Property="Facets">
+								<Collection>
+									<Record Type="UI.ReferenceFacet">
+										<PropertyValue Property="ID" String="PostingGroup"/>
+										<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#PostingGroup"/>
+									</Record>
+								</Collection>
+							</PropertyValue>
+						</Record>
+						<Record Type="UI.CollectionFacet">
+							<PropertyValue Property="Label" String="{@i18n&gt;HOUSE_BANK}"/>
+							<PropertyValue Property="ID" String="HouseBankFAC"/>
+							<PropertyValue Property="Facets">
+								<Collection>
+									<Record Type="UI.ReferenceFacet">
+										<PropertyValue Property="ID" String="HouseBankGroup"/>
+										<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#HouseBankGroup"/>
+									</Record>
+								</Collection>
+							</PropertyValue>
+						</Record>
+						<Record Type="UI.CollectionFacet">
+							<PropertyValue Property="Label" String="{@i18n&gt;PAYMENT_DATA}"/>
+							<PropertyValue Property="ID" String="PaymentDataFAC"/>
+							<PropertyValue Property="Facets">
+								<Collection>
+									<Record Type="UI.ReferenceFacet">
+										<PropertyValue Property="ID" String="PaymentDataGroup"/>
+										<PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#PaymentDataGroup"/>
+									</Record>
+								</Collection>
+							</PropertyValue>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

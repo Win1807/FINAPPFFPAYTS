@@ -1,0 +1,30 @@
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<core:FragmentDefinition
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m"
+	xmlns:smartForm="sap.ui.comp.smartform">
+
+	<smartForm:GroupElement 
+		id="PayeeBankGroup::BankRadioButtons::GroupElement"
+		visible="{
+			parts:[{path: 'btnModel>/appMode'}, {path: 'detailPage>/'}],
+			formatter: '.formatter.isBankRadioButtonsVisible'}"
+		>
+			<RadioButtonGroup 
+				id="radioButtonGroupIBAN"
+				class="sapUiSmallMarginBottom"
+				select="onBankRadioButtonsSelect"
+				selectedIndex="{ path: 'detailPage>/bankEntryType', mode: 'OneWay'}"
+			>
+				<buttons>
+					<RadioButton id="radioButtonBankDetails" text="{i18n>BANK_DETAILS_ENTRY}"/>
+					<RadioButton id="radioButtonIBAN" text="{i18n>IBAN_ENTRY}"/>
+				</buttons>
+			</RadioButtonGroup>
+	</smartForm:GroupElement>
+
+</core:FragmentDefinition>

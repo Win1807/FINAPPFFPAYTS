@@ -1,0 +1,174 @@
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+	<edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value"><edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/></edmx:Reference>
+	<edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value"><edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/></edmx:Reference>
+	<edmx:Reference
+		Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value"><edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/></edmx:Reference>
+	<edmx:Reference Uri="../../../sap/fap_process_ff_payments_srv/$metadata"><edmx:Include Namespace="FAP_PROCESS_FF_PAYMENTS_SRV" Alias="SAP"/></edmx:Reference>
+	<edmx:DataServices>
+		<Schema Namespace="fap_process_ff_payments_anno_mdl.v1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType/PayeeBank"><Annotation Term="Common.SemanticObject" String="Bank"/>
+				<Annotation Term="Common.Text" Path="PayeeBankName"><Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast"/></Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType/PayeeBankAccount"><Annotation Term="Common.SemanticObject" String="BankAccount"/></Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType/PayingCompanyCode"><Annotation Term="Common.SemanticObject" String="CompanyCode"/>
+				<Annotation Term="Common.Text" Path="PayingCompanyCodeName"><Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast"/></Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType/HouseBank"><Annotation Term="Common.SemanticObject" String="Bank"/>
+				<Annotation Term="Common.Text" Path="BankName"><Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast"/></Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType/HouseBankAccount"><Annotation Term="Common.SemanticObject" String="BankAccount"/></Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType/CompanyCode"><Annotation Term="Common.SemanticObject" String="CompanyCode"/>
+				<Annotation Term="Common.Text" Path="CompanyCodeName"><Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast"/></Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType/BusinessArea">
+				<Annotation Term="Common.Text" Path="BusinessAreaName"><Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast"/></Annotation>
+			</Annotations>
+			<Annotations Target="FAP_PROCESS_FF_PAYMENTS_SRV.C_PaymentRequestType">
+				<Annotation Term="UI.DataPoint" Qualifier="CompanyCode">
+					<Record><PropertyValue Property="Value" Path="CompanyCode"/><PropertyValue Property="Title" String="Company Code"/><PropertyValue Property="TargetValue" Path="CompanyCode"/></Record>
+				</Annotation>
+				<Annotation Term="UI.Facets">
+					<Collection>
+						<Record Type="UI.CollectionFacet"><PropertyValue Property="Label" String="Payee"/><PropertyValue Property="ID" String="PayeeFAC"/>
+							<PropertyValue Property="Facets">
+								<Collection>
+									<Record Type="UI.ReferenceFacet"><PropertyValue Property="Label" String=""/><PropertyValue Property="ID" String="PayeeGroup"/><PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#PayeeGroup"/></Record>
+								</Collection>
+							</PropertyValue>
+						</Record>
+						<Record Type="UI.CollectionFacet"><PropertyValue Property="Label" String="Posting Data"/><PropertyValue Property="ID" String="PostingDataFAC"/>
+							<PropertyValue Property="Facets">
+								<Collection>
+									<Record Type="UI.ReferenceFacet"><PropertyValue Property="Label" String=""/><PropertyValue Property="ID" String="PostingGroup"/><PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#PostingGroup"/></Record>
+								</Collection>
+							</PropertyValue>
+						</Record>
+						<Record Type="UI.CollectionFacet"><PropertyValue Property="Label" String="House Bank"/><PropertyValue Property="ID" String="HouseBankFAC"/>
+							<PropertyValue Property="Facets">
+								<Collection>
+									<Record Type="UI.ReferenceFacet"><PropertyValue Property="Label" String=""/><PropertyValue Property="ID" String="HouseBankGroup"/><PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#HouseBankGroup"/></Record>
+								</Collection>
+							</PropertyValue>
+						</Record>
+						<Record Type="UI.CollectionFacet"><PropertyValue Property="Label" String="Payment Data"/><PropertyValue Property="ID" String="PaymentDataFAC"/>
+							<PropertyValue Property="Facets">
+								<Collection>
+									<Record Type="UI.ReferenceFacet"><PropertyValue Property="Label" String=""/><PropertyValue Property="ID" String="PaymentDataGroup"/><PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#PaymentDataGroup"/></Record>
+								</Collection>
+							</PropertyValue>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.FieldGroup" Qualifier="HouseBankGroup">
+					<Record>
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PayingCompanyCode"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="HouseBank"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="HouseBankAccount"/></Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.FieldGroup" Qualifier="PayeeGroup">
+					<Record>
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="CompanyCode"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="BusinessArea"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PaymentRequestAmountInPaytCrcy"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PaymentRequestAmountInCCCrcy"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PayeeName"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PayeeCityName"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PayeeStreet"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PayeeCountry"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PayeeRegion"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PayeeLanguage"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PayeeFaxNumber"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PayeeTelephoneNumber"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PayeeBankCountry"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PayeeBankControlKey"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PayeeBank"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PayeeBankAccount"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PayeeBankInternalID"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="BankAccountHolderName"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PayeeIBAN"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="ReferenceTypeText"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PaymentReference"/></Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.FieldGroup" Qualifier="PaymentDataGroup">
+					<Record>
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PaymentMethod"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="IsSinglePayment"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="ValueDate"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PaymentRequestPostingDate"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="DataExchangeInstruction"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="IsUrgentPayment"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="StateCentralBankPaymentReason"/></Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.FieldGroup" Qualifier="PostingGroup">
+					<Record>
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="CustomerSupplierAccount"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="DocumentItemText"/></Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.HeaderInfo">
+					<Record><PropertyValue Property="TypeName" String="Payment Request"/><PropertyValue Property="TypeNamePlural" String="Payment Requests"/>
+						<PropertyValue Property="Title">
+							<Record Type="UI.DataField"><PropertyValue Property="Label" String="Payment Request"/><PropertyValue Property="Value" Path="PaymentRequest"/></Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.LineItem">
+					<Collection>
+						<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PaymentRequest"/></Record>
+						<Record Type="UI.DataField"><PropertyValue Property="Value" Path="CompanyCode"/></Record>
+						<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PayeeName"/></Record>
+						<Record Type="UI.DataField"><PropertyValue Property="Value" Path="CreatedByUser"/></Record>
+						<Record Type="UI.DataField"><PropertyValue Property="Value" Path="AccountingDocumentCreationDate"/></Record>
+						<Record Type="UI.DataField"><PropertyValue Property="Value" Path="SystemStatusName"/></Record>
+						<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PaymentRequestAmountInPaytCrcy"/></Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.PresentationVariant">
+					<Record><PropertyValue Property="Text" String=""/>
+						<PropertyValue Property="SortOrder">
+							<Collection>
+								<Record Type="Common.SortOrderType"><PropertyValue Property="Property" PropertyPath="PaymentRequest"/><PropertyValue Property="Descending" Bool="true"/></Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.SelectionFields">
+					<Collection>
+						<PropertyPath>PaymentRequest</PropertyPath>
+						<PropertyPath>CompanyCode</PropertyPath>
+						<PropertyPath>PayeeName</PropertyPath>
+						<PropertyPath>PaymentRequestAmountInPaytCrcy</PropertyPath>
+						<PropertyPath>PaymentRequestCurrency</PropertyPath>
+						<PropertyPath>CreatedByUser</PropertyPath>
+						<PropertyPath>AccountingDocumentCreationDate</PropertyPath>
+						<PropertyPath>SystemStatusName</PropertyPath>
+					</Collection>
+				</Annotation>
+			</Annotations>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

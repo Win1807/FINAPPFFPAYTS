@@ -1,0 +1,32 @@
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<core:FragmentDefinition
+	xmlns:core="sap.ui.core"
+	xmlns:smartlink="sap.ui.comp.navpopover"
+	xmlns:m="sap.m"
+>
+
+	<smartlink:SmartLink text="{LastChangedByUser}"
+		semanticObject="User"
+		contactAnnotationPath="to_ChangeUserContactCard"
+	/>
+
+	<smartlink:SmartLink text="{path:'PaymentBatch', formatter: '.formatter.removeLeadingZeros'}"
+		semanticObject="PaymentItem"
+		beforePopoverOpens="onPaymentBatchBeforePopoverOpens"
+	/>
+
+	<m:HBox>
+		<smartlink:SmartLink
+			visible="{= ${IsReversed} !== true }"
+			text="{ClearingAccountingDocument}"
+			semanticObject="ClearingAccountingDocument"
+		/>
+
+	   <m:Text visible="{= ${IsReversed} === true }" text="{ClearingAccountingDocument}" />
+	</m:HBox>
+
+</core:FragmentDefinition>
